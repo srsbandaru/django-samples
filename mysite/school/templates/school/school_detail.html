@@ -1,0 +1,16 @@
+{% extends "base_master.html" %}
+{% block title %}
+    School Details
+{% endblock title %}
+{% block content %}
+    <div class="container mt-3">
+        <h1>{{school.name}}</h1>
+        <p>City - {{school.city}}</p>
+        <p>Country - {{school.country}}</p>
+        <p>Year of Establishment - {{school.yearOfEstablishment}}</p>
+        <p>Email - {{school.email}}</p>
+        <p>Phone - {{school.phone}}</p>
+        <button class="btn btn-warning" type="submit" 
+        onclick="window.location = '{% url 'school:all' %}'">Back</button>
+    </div>
+{% endblock content %}

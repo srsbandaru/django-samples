@@ -4,5 +4,6 @@ from . import views
 app_name = "school"
 
 urlpatterns = [
-    path('', views.SchoolListView.as_view(), name = "all")
+    path('', views.SchoolList.as_view(), name = "all"),
+    path('detail/<int:pk>', views.SchoolDetail.as_view(), name = "school_detail")
 ]

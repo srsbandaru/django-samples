@@ -1,9 +1,40 @@
 {% extends "base_master.html" %}
 {% block title %}
-    school list
+    School List
 {% endblock title %}
 {% block content %}
     <div class="container mt-3">
         <h1>Schools</h1>
+    </div>
+    <div class="container">
+        {% if school_list  %}
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name of the School</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for school in school_list %}
+                        <tr>
+                            <th scope="row">{{school.id}}</th>
+                            <td>{{school.name}}</td>
+                            <td>{{school.city}}, {{school.country}}.</td>
+                            <td>
+                                <button type="button" class="btn btn-success btn-sm" 
+                                onclick="window.location = '{% url 'school:school_detail' school.id %}'">View</button>
+                                <button type="button" class="btn btn-warning btn-sm">Update</button>
+                                <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>There are no schools in the database.</p>
+        {% endif %}
     </div>
 {% endblock content %}
