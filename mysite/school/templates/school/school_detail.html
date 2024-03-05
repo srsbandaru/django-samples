@@ -10,7 +10,9 @@
         <p>Year of Establishment - {{school.yearOfEstablishment}}</p>
         <p>Email - {{school.email}}</p>
         <p>Phone - {{school.phone}}</p>
-        <button class="btn btn-warning" type="submit" 
+        <button class="btn btn-success" type="submit" 
         onclick="window.location = '{% url 'school:all' %}'">Back</button>
+        <button class="btn btn-warning" type="submit" 
+        onclick="window.location = '{% url 'school:school_update' school.id %}'">Update</button>
     </div>
 {% endblock content %}
