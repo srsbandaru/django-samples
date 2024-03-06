@@ -14,5 +14,7 @@
         onclick="window.location = '{% url 'school:all' %}'">Back</button>
         <button class="btn btn-warning" type="submit" 
         onclick="window.location = '{% url 'school:school_update' school.id %}'">Update</button>
+        <button class="btn btn-danger" type="submit" 
+        onclick="window.location = '{% url 'school:school_delete' school.id %}'">Delete</button>
     </div>
 {% endblock content %}

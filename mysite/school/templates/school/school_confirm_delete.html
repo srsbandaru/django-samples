@@ -1,0 +1,16 @@
+{% extends "base_master.html" %}
+{% block title %}
+    School Confirm Delete
+{% endblock title %}
+{% block content %}
+    <div class="container mt-3">
+        <h1>Delete School</h1>
+        <h3>Are you sure you want to delete this {{school.name}}?</h3>
+        <form class="m-3" action="" method="post">
+            {% csrf_token %}
+            <input class="btn btn-danger" type="submit" value="Delete">
+            <button class="btn btn-warning" type="submit" 
+        onclick="window.location = '{% url 'school:school_detail' school.id %}';return false;">Cancel</button>
+        </form>
+    </div>
+{% endblock content %}

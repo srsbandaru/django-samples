@@ -51,4 +51,21 @@ class SchoolUpdate(View):
         form.save()
         return redirect(self.success_url)
 
+class SchoolDelete(View):
+    model = School
+    template = 'school/school_confirm_delete.html'
+    success_url = "school:all"
+
+    def get(self, request, pk):
+        school = get_object_or_404(self.model, id=pk)
+        context = {
+            'school':school
+        }
+        return render(request, self.template, context)
+    
+    def post(self, request, pk):
+        school = get_object_or_404(self.model, id=pk)
+        school.delete()
+        return redirect(self.success_url)
+    
   

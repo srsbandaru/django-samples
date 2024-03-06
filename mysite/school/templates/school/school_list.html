@@ -28,7 +28,8 @@
                                 onclick="window.location = '{% url 'school:school_detail' school.id %}'">View</button>
                                 <button type="button" class="btn btn-warning btn-sm"
                                 onclick="window.location = '{% url 'school:school_update' school.id %}'">Update</button>
-                                <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                                <button type="button" class="btn btn-danger btn-sm"
+                                onclick="window.location = '{% url 'school:school_delete' school.id %}'">Delete</button>
                             </td>
                         </tr>
                     {% endfor %}
