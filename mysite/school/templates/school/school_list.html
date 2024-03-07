@@ -5,6 +5,8 @@
 {% block content %}
     <div class="container mt-3">
         <h1>Schools</h1>
+        <button type="button" class="btn btn-primary" 
+        onclick="window.location = '{% url 'school:school_create' %}'">Add School</button>
     </div>
     <div class="container">
         {% if school_list  %}

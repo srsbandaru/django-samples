@@ -16,6 +16,29 @@ class SchoolList(View):
         }
         return render(request, self.template, context)
     
+# School Create View
+class SchoolCreate(View):
+    template = "school/school_form.html"
+    success_url = "school:all"
+
+    def get(self, request):
+        form = SchoolForm()
+        context = {
+            'form':form
+        }
+        return render(request, self.template, context)
+    
+    def post(self, request):
+        form = SchoolForm(request.POST)
+        if not form.is_valid():
+            context = {
+                'form':form
+            }
+            return render(request, self.template, context)
+        form.save()
+        return redirect(self.success_url)
+
+# School Details View
 class SchoolDetail(View):
     model = School
     template = 'school/school_detail.html'
@@ -26,7 +49,8 @@ class SchoolDetail(View):
             'school':school
         }
         return render(request, self.template, context)
-
+    
+# School Update View
 class SchoolUpdate(View):
     model = School
     template = 'school/school_form.html'
@@ -51,6 +75,7 @@ class SchoolUpdate(View):
         form.save()
         return redirect(self.success_url)
 
+# School Delete View
 class SchoolDelete(View):
     model = School
     template = 'school/school_confirm_delete.html'
