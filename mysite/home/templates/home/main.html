@@ -4,7 +4,12 @@
 {% endblock title %}
 {% block content %}
     <div class="container mt-3">
-        <h1>Django Sample</h1>
+        <h1>Django Samples</h1>
+        {% if user.is_authenticated %}
+            <h3 class="text-secondary">Welcome {{user.get_username}}</h3>
+        {% else %}
+            <h3 class="text-secondary">Welcome Guest</h3>
+        {% endif %}
         <div class="list-group">
             <a href="/school" class="list-group-item list-group-item-action" aria-current="true">
                 Schools
