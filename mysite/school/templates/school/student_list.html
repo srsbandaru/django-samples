@@ -1,0 +1,45 @@
+{% extends "base_master.html" %}
+{% block title %}
+    Students
+{% endblock title %}
+{% block content %}
+    <div class="container mt-3">
+        <h1>Students</h1>
+        <button type="button" class="btn btn-primary"
+        onclick="window.location = '{% url 'school:student_create' %}'">Add Student</button>
+        <button type="button" class="btn btn-primary"
+        onclick="window.location = '{% url 'school:all' %}'">View Schools</button>
+    </div>
+    <div class="container mt-4">
+        {% if student_list %}
+        <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name of the Student</th>
+                <th scope="col">School</th>
+                <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in student_list %}
+                    <tr>
+                        <th scope="row">{{student.id}}</th>
+                        <td>{{student.name}}</td>
+                        <td>{{student.school}}</td>
+                        <td>
+                            <button type="button" class="btn btn-success btn-sm">View</button>
+                            <button type="button" class="btn btn-warning btn-sm">Update</button>
+                            <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table> 
+        {% else %}
+            <div class="alert alert-info" role="alert">
+               There are no students in the database.
+            </div>
+        {% endif %}    
+    </div>
+{% endblock content %}

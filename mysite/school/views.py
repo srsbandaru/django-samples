@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
-from school.models import School
-from school.forms import SchoolForm
+from school.models import School, Student
+from school.forms import SchoolForm, StudentForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
@@ -93,5 +93,35 @@ class SchoolDelete(LoginRequiredMixin, View):
         school = get_object_or_404(self.model, id=pk)
         school.delete()
         return redirect(self.success_url)
-    
-  
+
+# Students List View
+class StudentList(View):
+    template = "school/student_list.html"
+
+    def get(self, request):
+        student_list = Student.objects.all()
+        context = {
+            'student_list':student_list
+        }
+        return render(request, self.template, context)
+
+# Student Create View
+class StudentCreate(LoginRequiredMixin, View):
+    template = "school/student_form.html"
+    success_url = "school:student_list"
+
+    def get(self, request):
+        form = StudentForm()
+        context = {
+            'form':form
+        }
+        return render(request, self.template, context)
+    def post(self, request):
+        form = StudentForm(request.POST)
+        if not form.is_valid():
+            context = {
+                "form":form
+            }
+            return render(request, self.template, context)
+        form.save()
+        return redirect(self.success_url)

@@ -1,12 +1,14 @@
 {% extends "base_master.html" %}
 {% block title %}
-    School List
+    Schools
 {% endblock title %}
 {% block content %}
     <div class="container mt-3">
         <h1>Schools</h1>
         <button type="button" class="btn btn-primary" 
         onclick="window.location = '{% url 'school:school_create' %}'">Add School</button>
+        <button type="button" class="btn btn-primary"
+        onclick="window.location = '{% url 'school:student_list' %}'">View Students</button>
     </div>
     <div class="container">
         {% if school_list  %}
@@ -38,7 +40,9 @@
                 </tbody>
             </table>
         {% else %}
-            <p>There are no schools in the database.</p>
+            <div class="alert alert-info" role="alert">
+               There are no schools in the database.
+            </div>
         {% endif %}
     </div>
 {% endblock content %}
