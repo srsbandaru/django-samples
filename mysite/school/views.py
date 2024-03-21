@@ -89,7 +89,7 @@ class SchoolDelete(LoginRequiredMixin, View):
         }
         return render(request, self.template, context)
     
-    def post(self, request, pk):
+    def post(self, pk):
         school = get_object_or_404(self.model, id=pk)
         school.delete()
         return redirect(self.success_url)
@@ -124,4 +124,58 @@ class StudentCreate(LoginRequiredMixin, View):
             }
             return render(request, self.template, context)
         form.save()
+        return redirect(self.success_url)
+    
+# Student Detail View
+class StudentDetail(View):
+    model = Student
+    template = "school/student_detail.html"
+
+    def get(self, request, pk):
+        student = get_object_or_404(self.model, id=pk)
+        context = {
+            'student':student
+        }
+        return render(request, self.template, context)
+    
+# Student Update View
+class StudentUpdate(LoginRequiredMixin,View):
+    model = Student
+    template = "school/student_form.html"
+    success_url = "school:student_list"
+
+    def get(self, request, pk):
+        student = get_object_or_404(self.model, id=pk)
+        form = StudentForm(instance=student)
+        context = {
+            'form':form
+        }
+        return render(request, self.template, context)
+    
+    def post(self, request, pk):
+        student = get_object_or_404(self.model, id=pk)
+        form = StudentForm(request.POST,instance=student)
+        if not form.is_valid():
+            context = {
+                'form':form
+            }
+            return render(request, self.template, context)
+        form.save()
+        return redirect(self.success_url)
+
+# Student Delete View  
+class StudentDelete(LoginRequiredMixin,View):
+    model = Student
+    template = "school/student_confirm_delete.html"
+    success_url = "school:student_list"
+
+    def get(self, request, pk):
+        student = get_object_or_404(self.model, id=pk)
+        context = {
+            'student':student
+        }
+        return render(request, self.template, context)
+    def post(self, request, pk):
+        student = get_object_or_404(self.model, id=pk)
+        student.delete()
         return redirect(self.success_url)

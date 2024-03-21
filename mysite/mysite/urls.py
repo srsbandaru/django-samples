@@ -30,5 +30,6 @@ urlpatterns = [
             ),
     path("", TemplateView.as_view(template_name='home/main.html')),
     path("school/", include("school.urls")),
+    path("employee/", include("employee.urls")),
     path("accounts/", include("django.contrib.auth.urls"))
 ]
