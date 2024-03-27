@@ -3,6 +3,7 @@ from .models import Department
 from employee.forms import DepartmentForm
 from django.views import View
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
@@ -16,9 +17,9 @@ class DepartmentList(View):
             'department_list':department_list
         }
         return render(request, self.template, context)
-    
+   
 # Create Department View
-class CreateDepartment(View):
+class CreateDepartment(LoginRequiredMixin, View):
     template = 'employee/department_form.html'
     success_url = 'employee:all'
 
@@ -39,9 +40,9 @@ class CreateDepartment(View):
         form.save()
         messages.success(request, "Department was successfully created.")
         return redirect(self.success_url)
-    
+
 # Edit Department View 
-class EditDepartment(View):
+class EditDepartment(LoginRequiredMixin, View):
     model = Department
     template = "employee/department_form.html"
     success_url = "employee:all"
@@ -68,7 +69,7 @@ class EditDepartment(View):
         return redirect(self.success_url)
     
 # Delete Department View
-class DeleteDepartment(View):
+class DeleteDepartment(LoginRequiredMixin, View):
     model = Department
     template = "employee/department_confirm_delete.html"
     success_url = "employee:all"

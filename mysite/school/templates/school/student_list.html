@@ -21,7 +21,11 @@
                     <th scope="col">#</th>
                     <th scope="col">Name of the Student</th>
                     <th scope="col">School</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">
+                    {% if user.is_authenticated %}
+                        Actions
+                    {% endif %}
+                    </th>
                     </tr>
                 </thead>
                 <tbody>
