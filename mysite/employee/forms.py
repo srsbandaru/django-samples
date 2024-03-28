@@ -4,5 +4,6 @@ from employee.models import Department
 class DepartmentForm(ModelForm):
     class Meta:
         model = Department
-        fields = "__all__"
+        # fields = "__all__"
+        fields = ['name', 'location']
         

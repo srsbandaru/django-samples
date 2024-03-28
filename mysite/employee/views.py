@@ -37,7 +37,11 @@ class CreateDepartment(LoginRequiredMixin, View):
                 'form':form
             }
             return render(request, self.template, context)
-        form.save()
+        
+        obj = form.save(commit = False)
+        obj.owner = self.request.user
+        obj.save()
+
         messages.success(request, "Department was successfully created.")
         return redirect(self.success_url)
 
@@ -64,8 +68,15 @@ class EditDepartment(LoginRequiredMixin, View):
             }
             messages.error(request, "Please enter all the required details.")
             return render(request, self.template, context)
-        form.save()
-        messages.success(request, "Department was successfully updated.")
+        
+        obj = form.save(commit = False)
+
+        if obj.owner == self.request.user:
+            obj.save()
+            messages.success(request, "Department was successfully updated.")
+        else:
+            messages.error(request, "You are not allowed to edit.")
+            
         return redirect(self.success_url)
     
 # Delete Department View
